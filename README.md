@@ -14,3 +14,4 @@
 
 
 # notes: wrap each char into a <span> so that you can change exact chars color
+maybe use class to define chars as well <3 gl 
