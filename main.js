@@ -99,14 +99,34 @@ function delete_loop() {
         }
     }
 
-    setTimeout(delete_loop, 500);
+    //setTimeout(delete_loop, 500);
+}
+
+function cursor() {
+    if(words_I_typed.length > 0) {
+        for (j = 0; j < words_I_typed.length; j++) {
+            if (j === words_I_typed.length-1) {
+                index_span = document.getElementById("words").children[words_I_typed.length];
+                index_span.className = "cursor";
+
+            } else {
+                index_span = document.getElementById("words").children[j+1];
+                index_span.className = "NONE";
+                index_span.style.background = "white";
+                index_span.style.color = "black";
+
+
+
+            }
+        }
+    }
 }
 function update_game() {
     words_I_typed = searchbar.value;
-    //console.log(words_I_typed);
-    index_span = document.getElementById("words").children[words_I_typed.length];
-    index_span.className = "cursor";
 
+    cursor();
+
+    // CHECK IF WORDS ARE CORRECT
     if(words_I_typed.length > 0){
         correct = true;
         for(i = 0; i < words_I_typed.length; i++){
