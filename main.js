@@ -71,11 +71,11 @@ function deleted(event) {
             span = document.getElementById("words").children[i - 1]
             span.style.color = "black";
             span.style.background = "white";
-            span1.style.opacity = ".5";
+            span.style.opacity = ".5";
             span3 = document.getElementById("words").children[i + 1]
             span3.style.color = "black";
             span3.style.background = "white";
-            span1.style.opacity = ".5";
+            span3.style.opacity = ".5";
 
         }
     }
@@ -90,7 +90,7 @@ function delete_loop() {
             if (spanplus2 !== undefined) {
                 spanplus2.style.color = "black";
                 spanplus2.style.background = "white";
-                span1.style.opacity = ".5";
+                spanplus2.style.opacity = ".5";
 
             } else {
             }
