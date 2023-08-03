@@ -4,8 +4,8 @@ char_w_array100 = [];
 words_I_typed = "";
 let searchbar = document.getElementById("query");
 down_or_up = true;
-// true = down, false = up
 
+// true = down, false = up
 function get_1kwords(){
     fetch("https://gist.githubusercontent.com/deekayen/4148741/raw/98d35708fa344717d8eee15d11987de6c8e26d7d/1-1000.txt")
         .then(response => response.text())
@@ -50,6 +50,7 @@ function add_chars_to_div(char_array) {
         div.appendChild(char);
     }
 }
+
 
 function first_launch() {
     get_1kwords();
@@ -102,7 +103,9 @@ function delete_loop() {
 }
 function update_game() {
     words_I_typed = searchbar.value;
-    console.log(words_I_typed);
+    //console.log(words_I_typed);
+    index_span = document.getElementById("words").children[words_I_typed.length];
+    index_span.className = "cursor";
 
     if(words_I_typed.length > 0){
         correct = true;
@@ -120,12 +123,7 @@ function update_game() {
                 span1.style.opacity = "1";
             }
         }
-        if(correct){
-            console.log("correct");
-        }
-        else{
-            console.log("incorrect");
-        }
+
     }
 }
 

@@ -8,3 +8,20 @@
     height: 40px;
     /*visibility: hidden;*/
 }
+/* Define the cursor element */
+.cursor {
+    width: 2px; /* Adjust the width of the cursor */
+    height: 20px; /* Adjust the height of the cursor */
+    background-color: black; /* Adjust the cursor color */
+    animation: blink 0.8s step-end infinite; /* Define the animation */
+}
+
+/* Define the blinking animation */
+@keyframes blink {
+    from, to {
+        opacity: 0; /* Hide the cursor at the beginning and end of the animation */
+    }
+    50% {
+        opacity: 1; /* Show the cursor at the midpoint of the animation */
+    }
+}
