@@ -4,8 +4,8 @@ char_w_array100 = [];
 words_I_typed = "";
 let searchbar = document.getElementById("query");
 down_or_up = true;
-// true = down, false = up
 
+// true = down, false = up
 function get_1kwords(){
     fetch("https://gist.githubusercontent.com/deekayen/4148741/raw/98d35708fa344717d8eee15d11987de6c8e26d7d/1-1000.txt")
         .then(response => response.text())
@@ -51,6 +51,7 @@ function add_chars_to_div(char_array) {
     }
 }
 
+
 function first_launch() {
     get_1kwords();
 }
@@ -71,11 +72,11 @@ function deleted(event) {
             span = document.getElementById("words").children[i - 1]
             span.style.color = "black";
             span.style.background = "white";
-            span1.style.opacity = ".5";
+            span.style.opacity = ".5";
             span3 = document.getElementById("words").children[i + 1]
             span3.style.color = "black";
             span3.style.background = "white";
-            span1.style.opacity = ".5";
+            span3.style.opacity = ".5";
 
         }
     }
@@ -90,7 +91,7 @@ function delete_loop() {
             if (spanplus2 !== undefined) {
                 spanplus2.style.color = "black";
                 spanplus2.style.background = "white";
-                span1.style.opacity = ".5";
+                spanplus2.style.opacity = ".5";
 
             } else {
             }
@@ -98,12 +99,34 @@ function delete_loop() {
         }
     }
 
-    setTimeout(delete_loop, 500);
+    //setTimeout(delete_loop, 500);
+}
+
+function cursor() {
+    if(words_I_typed.length > 0) {
+        for (j = 0; j < words_I_typed.length; j++) {
+            if (j === words_I_typed.length-1) {
+                index_span = document.getElementById("words").children[words_I_typed.length];
+                index_span.className = "cursor";
+
+            } else {
+                index_span = document.getElementById("words").children[j+1];
+                index_span.className = "NONE";
+                index_span.style.background = "white";
+                index_span.style.color = "black";
+
+
+
+            }
+        }
+    }
 }
 function update_game() {
     words_I_typed = searchbar.value;
-    console.log(words_I_typed);
 
+    cursor();
+
+    // CHECK IF WORDS ARE CORRECT
     if(words_I_typed.length > 0){
         correct = true;
         for(i = 0; i < words_I_typed.length; i++){
@@ -120,12 +143,7 @@ function update_game() {
                 span1.style.opacity = "1";
             }
         }
-        if(correct){
-            console.log("correct");
-        }
-        else{
-            console.log("incorrect");
-        }
+
     }
 }
 
