@@ -1,104 +1,141 @@
-words_you_typed = "";
-chars_to_check = [];
-chars_you_typed = [];
+array_of_1kwords = [];
+array_of_100words = [];
+char_w_array100 = [];
+words_I_typed = "";
+let searchbar = document.getElementById("query");
+down_or_up = true;
+// true = down, false = up
 
-function typing(){
-    const searchvalue = document.getElementById('query');
-    words_you_typed = searchvalue.value;
-    chars_you_typed = array_to_chars(words_you_typed, false)
-    check_words()
-}
-function check_words() {
-    let correct = true;
-    for (let i = 0; i < chars_you_typed.length; i++) {
-        //console.log(chars_you_typed.length);
-
-        if (chars_to_check[i] !== chars_you_typed[i]) {
-
-
-            update_colors(i, true);
-            correct = false;
-            // change incorrect index to red
-        } else {
-            update_colors(i, false);
-            //console.log("correct")
-            // change correct index to green
-        }
-
-
-    }
-    if (correct) {
-        console.log("correct")
-    } else {
-    console.log("incorrect")
-}
-    update_game()
-}
-function get_words() {
-    console.log("fetching data");
+function get_1kwords(){
     fetch("https://gist.githubusercontent.com/deekayen/4148741/raw/98d35708fa344717d8eee15d11987de6c8e26d7d/1-1000.txt")
         .then(response => response.text())
         .then(textData => { // chain of promises
-            oneword = [];
-            oneword = textData.split("\n");
-            onehundred_words = [];
-            for(i = 0; i < 100; i++) {
-                onehundred_words.push(oneword[Math.floor(Math.random() * 100)]);
+            array_of_1kwords = textData.split("\n");
+
+            for(i = 0; i < 100; i++){
+                array_of_100words.push(array_of_1kwords[Math.floor(Math.random() * 100)]);
             }
-            chars_to_check = array_to_chars(onehundred_words, true)
-            update_game()
+            char_w_array100 = array_to_char(array_of_100words);
+            add_chars_to_div(char_w_array100);
         })
         .catch(error => {
             console.error("Error fetching data:", error);
         });
 }
 
-
-function update_game() {
-    word_div = document.getElementById('words');
-    word_div.innerHTML = chars_to_check.join("");
-}
-function update_colors(word_i_am_on, bool) {
-    word_div = document.getElementById('words');
-    if(bool) {
-        word_div.innerHTML[word_i_am_on].style = "color: red"
-    } else {
-        word_div.innerHTML[word_i_am_on].style = "color: green"
-    }
-}
-
-
-
-
-function array_to_chars(init_array, bool) {
-    let push_array = [];
-    for (i = 0; i < init_array.length; i++) {
-
-        for (j = 0; j < init_array[i].length; j++) {
-            push_array.push(init_array[i][j]);
+function array_to_char(array) {
+    let char_array = [];
+    if (array.length !== 0) {
+        for (i = 0; i < array.length; i++) {
+            for (j = 0; j < array[i].length; j++) {
+                char_array.push(array[i][j]);
+            }
+            char_array.push(" ");
         }
-        if(bool) {
-            push_array.push(" ");
-        }
-    }
-    return push_array;
-}
-let time = 0;
-function timer() {
-    document.getElementById('query').focus();
-
-    if (time < 15) {
-        setTimeout(timer, 1000);
-        time += 1;
-        console.log(time);
-
     }
     else {
-        word_div = document.getElementById('words');
-        word_div.innerHTML = "Game Over";
+        console.log("hi");
+    }
+    return char_array;
+}
 
+function add_chars_to_div(char_array) {
+    let div = document.getElementById("words");
+    for (i = 0; i < char_array.length; i++) {
+        let char = document.createElement("span");
+        char.innerHTML = char_array[i];
+        //change its color
+        char.style.color = "black";
+        char.style.opacity = "0.5";
+        div.appendChild(char);
+    }
+}
+
+function first_launch() {
+    get_1kwords();
+}
+function searchbar_focus() {
+
+    searchbar.focus();
+    setTimeout(searchbar_focus, 1000);
+}
+function start_game(time) {
+    searchbar_focus();
+    delete_loop();
+    // Start the game
+}
+
+function deleted(event) {
+    if(words_I_typed.length > 0) {
+        if (event.keyCode === 8) {
+            span = document.getElementById("words").children[i - 1]
+            span.style.color = "black";
+            span.style.background = "white";
+            span1.style.opacity = ".5";
+            span3 = document.getElementById("words").children[i + 1]
+            span3.style.color = "black";
+            span3.style.background = "white";
+            span1.style.opacity = ".5";
+
+        }
+    }
+    // true = down, false = up
+}
+//loop that checks length of words you are typing turns all other after it words to black
+function delete_loop() {
+    if(true) {
+        word_div = document.getElementById("words");
+        for (i = char_w_array100.length; i > words_I_typed.length-1; i--) {
+            spanplus2 = word_div.children[i];
+            if (spanplus2 !== undefined) {
+                spanplus2.style.color = "black";
+                spanplus2.style.background = "white";
+                span1.style.opacity = ".5";
+
+            } else {
+            }
+
+        }
+    }
+
+    setTimeout(delete_loop, 500);
+}
+function update_game() {
+    words_I_typed = searchbar.value;
+    console.log(words_I_typed);
+
+    if(words_I_typed.length > 0){
+        correct = true;
+        for(i = 0; i < words_I_typed.length; i++){
+
+            if(words_I_typed[i] !== char_w_array100[i]) {
+                span = document.getElementById("words").children[i];
+                span.style.background = "red";
+                span1.style.opacity = ".5";
+                correct = false;
+            }
+            else{
+                span1 = document.getElementById("words").children[i];
+                span1.style.background = "green";
+                span1.style.opacity = "1";
+            }
+        }
+        if(correct){
+            console.log("correct");
+        }
+        else{
+            console.log("incorrect");
+        }
     }
 }
 
 
-// fetch is async function so array is empty when you try to print it
+function color_updater() {
+    // Update the color of the char subset of update_game()
+}
+first_launch();
+start_game(15);
+
+
+
+// force focus the thing you can type in, hide it, then when user writes words highlight them accordingly
