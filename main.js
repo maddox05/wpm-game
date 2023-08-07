@@ -86,12 +86,13 @@ function deleted(event) {
 function delete_loop() {
     if(true) {
         word_div = document.getElementById("words");
-        for (i = char_w_array100.length; i > words_I_typed.length-1; i--) {
+        for (i = char_w_array100.length; i> words_I_typed.length; i--) {
             spanplus2 = word_div.children[i];
-            if (spanplus2 !== undefined) {
+            if (spanplus2 !== undefined && spanplus2.className !== "cursor") {
                 spanplus2.style.color = "black";
-                spanplus2.style.background = "white";
+                //spanplus2.style.background = "white";
                 spanplus2.style.opacity = ".5";
+                spanplus2.className = "NONE";
 
             } else {
             }
@@ -99,7 +100,7 @@ function delete_loop() {
         }
     }
 
-    //setTimeout(delete_loop, 500);
+    setTimeout(delete_loop, 500);
 }
 
 function cursor() {
@@ -112,7 +113,6 @@ function cursor() {
             } else {
                 index_span = document.getElementById("words").children[j+1];
                 index_span.className = "NONE";
-                index_span.style.background = "white";
                 index_span.style.color = "black";
 
 
