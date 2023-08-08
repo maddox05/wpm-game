@@ -1,17 +1,14 @@
-array_of_1kwords = [];
-array_of_100words = [];
 char_w_array100 = [];
 words_I_typed = "";
 let searchbar = document.getElementById("query");
-down_or_up = true;
 
-// true = down, false = up
 function get_1kwords(){
     fetch("https://gist.githubusercontent.com/deekayen/4148741/raw/98d35708fa344717d8eee15d11987de6c8e26d7d/1-1000.txt")
         .then(response => response.text())
         .then(textData => { // chain of promises
             console.log("Data fetched");
-            array_of_1kwords = textData.split("\n");
+            let array_of_1kwords = textData.split("\n");
+            let array_of_100words = [];
 
             for(i = 0; i < 100; i++){
                 array_of_100words.push(array_of_1kwords[Math.floor(Math.random() * 100)]);
@@ -53,26 +50,12 @@ function add_chars_to_div(char_array) {
 }
 
 
-function searchbar_focus() {
+function searchbar_focus_loop() {
 
     searchbar.focus();
-    setTimeout(searchbar_focus, 1000);
+    setTimeout(searchbar_focus_loop, 1000);
 }
-function start_game(time) {
-    searchbar.value = "";
-    searchbar_focus();
-    delete_loop();
 
-    word_div = document.getElementById("words");
-    word_div.innerHTML = "";
-    array_of_1kwords = [];
-    array_of_100words = [];
-    char_w_array100 = [];
-    words_I_typed = "";
-    get_1kwords();
-    timer(time);
-        // Start the game
-}
 
 function deleted(event) {
     if(words_I_typed.length > 0) {
@@ -142,13 +125,14 @@ function update_game() {
             if(words_I_typed[i] !== char_w_array100[i]) {
                 span = document.getElementById("words").children[i];
                 span.style.background = "red";
-                span1.style.opacity = ".5";
+                span.style.opacity = ".5";
                 correct = false;
+
             }
             else{
-                span1 = document.getElementById("words").children[i];
-                span1.style.background = "green";
-                span1.style.opacity = "1";
+                span = document.getElementById("words").children[i];
+                span.style.background = "green";
+                span.style.opacity = "1";
             }
         }
 
@@ -156,20 +140,61 @@ function update_game() {
 }
 
 
-
-function timer(time) {
-    time = time;
-    button = document.getElementById("start");
-    button.innerHTML = "start: "+ time;
+let time = 15;
+async function timer(time) {
+    button = document.getElementById("timer");
+    button.innerHTML = "time: " + time;
 // counts down from certain time
     if (time > 0) {
         time--;
         setTimeout(timer, 1000, time);
-    }
-    else {
-        start_game(15)
+    } else {
+        console.log("game over");
+        end_game();
+
+        word_div = document.getElementById("words");
+        word_div.innerHTML = "";
+        button.innerHTML = "time:";
     }
 }
+
+
+async function start_game(time) {
+    score_div = document.getElementById("score");
+    score_div.innerHTML = "score: ";
+    searchbar.value = "";
+
+    await get_1kwords();
+    timer(time);
+    // Start the game
+}
+function end_game() {
+    score();
+    char_w_array100 = [];
+    words_I_typed = "";
+    searchbar.value = "";
+
+}
+function score() {
+    //time
+    let errors = find_errors();
+    let score = ((words_I_typed.length/5)-errors) / (time/60);
+    console.log(score);
+    let score_div = document.getElementById("score");
+    score_div.innerHTML = "score: " + score.toFixed(2);
+}
+function find_errors() {
+    errors = 0;
+    for(i = 0; i < words_I_typed.length; i++){
+        if(words_I_typed[i] !== char_w_array100[i]) {
+            errors++;
+        }
+    }
+    return errors;
+}
+
+searchbar_focus_loop();
+delete_loop();
 
 
 
