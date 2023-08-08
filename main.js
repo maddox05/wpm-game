@@ -75,20 +75,18 @@ function deleted(event) {
 }
 //loop that checks length of words you are typing turns all other after it words to black
 function delete_loop() {
-    if(true) {
-        word_div = document.getElementById("words");
-        for (i = char_w_array100.length; i> words_I_typed.length; i--) {
-            spanplus2 = word_div.children[i];
-            if (spanplus2 !== undefined && spanplus2.className !== "cursor") {
-                spanplus2.style.color = "black";
-                spanplus2.style.background = "white";
-                spanplus2.style.opacity = ".5";
-                spanplus2.className = "NONE";
+    word_div = document.getElementById("words");
+    for (i = char_w_array100.length; i> words_I_typed.length; i--) {
+        spanplus2 = word_div.children[i];
+        if (spanplus2 !== undefined && spanplus2.className !== "cursor") {
+            spanplus2.style.color = "black";
+            spanplus2.style.background = "white";
+            spanplus2.style.opacity = ".5";
+            spanplus2.className = "NONE";
 
-            } else {
-            }
-
+        } else {
         }
+
     }
 
     setTimeout(delete_loop, 500);
