@@ -53,14 +53,13 @@ function add_chars_to_div(char_array) {
 }
 
 
-function start() {
-}
 function searchbar_focus() {
 
     searchbar.focus();
     setTimeout(searchbar_focus, 1000);
 }
 function start_game(time) {
+    searchbar.value = "";
     searchbar_focus();
     delete_loop();
 
@@ -71,7 +70,8 @@ function start_game(time) {
     char_w_array100 = [];
     words_I_typed = "";
     get_1kwords();
-    // Start the game
+    timer(time);
+        // Start the game
 }
 
 function deleted(event) {
@@ -157,8 +157,18 @@ function update_game() {
 
 
 
-function color_updater() {
-    // Update the color of the char subset of update_game()
+function timer(time) {
+    time = time;
+    button = document.getElementById("start");
+    button.innerHTML = "start: "+ time;
+// counts down from certain time
+    if (time > 0) {
+        time--;
+        setTimeout(timer, 1000, time);
+    }
+    else {
+        start_game(15)
+    }
 }
 
 
