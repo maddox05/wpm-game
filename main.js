@@ -10,6 +10,7 @@ function get_1kwords(){
     fetch("https://gist.githubusercontent.com/deekayen/4148741/raw/98d35708fa344717d8eee15d11987de6c8e26d7d/1-1000.txt")
         .then(response => response.text())
         .then(textData => { // chain of promises
+            console.log("Data fetched");
             array_of_1kwords = textData.split("\n");
 
             for(i = 0; i < 100; i++){
@@ -52,28 +53,35 @@ function add_chars_to_div(char_array) {
 }
 
 
-function first_launch() {
-    get_1kwords();
-}
 function searchbar_focus() {
 
     searchbar.focus();
     setTimeout(searchbar_focus, 1000);
 }
 function start_game(time) {
+    searchbar.value = "";
     searchbar_focus();
     delete_loop();
-    // Start the game
+
+    word_div = document.getElementById("words");
+    word_div.innerHTML = "";
+    array_of_1kwords = [];
+    array_of_100words = [];
+    char_w_array100 = [];
+    words_I_typed = "";
+    get_1kwords();
+    timer(time);
+        // Start the game
 }
 
 function deleted(event) {
     if(words_I_typed.length > 0) {
         if (event.keyCode === 8) {
-            span = document.getElementById("words").children[i - 1]
+            span = document.getElementById("words").children[i - 1];
             span.style.color = "black";
             span.style.background = "white";
             span.style.opacity = ".5";
-            span3 = document.getElementById("words").children[i + 1]
+            span3 = document.getElementById("words").children[i + 1];
             span3.style.color = "black";
             span3.style.background = "white";
             span3.style.opacity = ".5";
@@ -86,12 +94,13 @@ function deleted(event) {
 function delete_loop() {
     if(true) {
         word_div = document.getElementById("words");
-        for (i = char_w_array100.length; i > words_I_typed.length-1; i--) {
+        for (i = char_w_array100.length; i> words_I_typed.length; i--) {
             spanplus2 = word_div.children[i];
-            if (spanplus2 !== undefined) {
+            if (spanplus2 !== undefined && spanplus2.className !== "cursor") {
                 spanplus2.style.color = "black";
                 spanplus2.style.background = "white";
                 spanplus2.style.opacity = ".5";
+                spanplus2.className = "NONE";
 
             } else {
             }
@@ -99,7 +108,7 @@ function delete_loop() {
         }
     }
 
-    //setTimeout(delete_loop, 500);
+    setTimeout(delete_loop, 500);
 }
 
 function cursor() {
@@ -112,7 +121,6 @@ function cursor() {
             } else {
                 index_span = document.getElementById("words").children[j+1];
                 index_span.className = "NONE";
-                index_span.style.background = "white";
                 index_span.style.color = "black";
 
 
@@ -148,11 +156,21 @@ function update_game() {
 }
 
 
-function color_updater() {
-    // Update the color of the char subset of update_game()
+
+function timer(time) {
+    time = time;
+    button = document.getElementById("start");
+    button.innerHTML = "start: "+ time;
+// counts down from certain time
+    if (time > 0) {
+        time--;
+        setTimeout(timer, 1000, time);
+    }
+    else {
+        start_game(15)
+    }
 }
-first_launch();
-start_game(15);
+
 
 
 
