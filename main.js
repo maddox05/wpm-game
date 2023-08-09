@@ -109,12 +109,18 @@ function cursor() {
             }
         }
     }
+    else {
+        index_span = document.getElementById("words").children[0];
+        index_span.className = "cursor";
+        console.log("hi");
+    }
 }
 function update_game() {
     words_I_typed = searchbar.value;
 
     cursor();
-
+    index_span = document.getElementById("words").children[0];
+    index_span.className = "NONE";
     // CHECK IF WORDS ARE CORRECT
     if(words_I_typed.length > 0){
         correct = true;
@@ -156,13 +162,18 @@ async function timer(time) {
     }
 }
 
-
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 async function start_game(time) {
     score_div = document.getElementById("score");
     score_div.innerHTML = "score: ";
     searchbar.value = "";
 
     await get_1kwords();
+    await delay(200);
+    index_span = document.getElementById("words").children[0];
+    index_span.className = "cursor";
     timer(time);
     // Start the game
 }

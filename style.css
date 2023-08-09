@@ -6,7 +6,6 @@
     align-items: center;
     margin-top: 20px;
     height: 40px;
-    /*visibility: hidden;*/
 }
 /* Define the cursor element */
 .cursor {
@@ -21,8 +20,10 @@
 @keyframes blink {
     from, to {
         opacity: .5; /* Hide the cursor at the beginning and end of the animation */
+        background-color: white;
     }
     50% {
         opacity: .8; /* Show the cursor at the midpoint of the animation */
+        background-color: gray;
     }
 }
