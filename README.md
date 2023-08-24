@@ -30,6 +30,7 @@ This is a simple typing test application that allows you to measure your typing 
 
 - This application is intended for practice and entertainment purposes and may not provide precise measurements of typing speed.
 - The list of words used in the test is fetched from an external source and may vary each time the application is run.
+- Starting and stopping is broken, I need to fix it. Restart the page to start again. I may fully rework the application.
 
 ## Credits
 
