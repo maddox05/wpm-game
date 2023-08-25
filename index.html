@@ -13,20 +13,6 @@
     <title>Maddox Type</title>
     <link rel="stylesheet" href="style.css">
 
-    <script src="main.js" type="text/javascript" defer></script>
-
-</head>
-<body>
-
-
-<h1 id="title">Maddox Type</h1>
-<div id = "words"></div>
-<label for="query"></label><input class = "searchbar" onkeyup="update_game();" onkeydown="deleted(event);" type="text" id="query" name="searchbar"  placeholder="Type...">
-<button id="timer">time: </button>
-<br>
-<button id="start" onclick="start_game(15)">start (15sec)</button>
-<div id="score">score: </div>
-
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
@@ -50,5 +36,21 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
     </script>
+
+    <script src="main.js" type="text/javascript" defer></script>
+
+</head>
+<body>
+
+
+<h1 id="title">Maddox Type</h1>
+<div id = "words"></div>
+<label for="query"></label><input class = "searchbar" onkeyup="update_game();" onkeydown="deleted(event);" type="text" id="query" name="searchbar"  placeholder="Type...">
+<button id="timer">time: </button>
+<br>
+<button id="start" onclick="start_game(15)">start (15sec)</button>
+<div id="score">score: </div>
+
+
 
 </body>
