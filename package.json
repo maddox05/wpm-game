@@ -1,7 +1,0 @@
-{
-  "name": "wpm-game",
-  "version": "1.0.0",
-  "dependencies": {
-    "firebase": "^10.3.0"
-  }
-}

@@ -1,5 +1,3 @@
-
-
 char_w_array100 = [];
 
 words_I_typed = "";
