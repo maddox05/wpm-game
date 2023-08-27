@@ -188,7 +188,8 @@ function end_game() {
 function score() {
     //time
     let errors = find_errors();
-    let score = ((words_I_typed.length/5)-errors) / (time/60);
+    let goods = find_goods();
+    let score = (((goods+errors)/5)-errors)/(time/60);
     console.log(score);
     let score_div = document.getElementById("score");
     score_div.innerHTML = "score: " + score.toFixed(2);
@@ -202,6 +203,16 @@ function find_errors() {
     }
     return errors;
 }
+function find_goods() {
+    goods = 0;
+    for(i = 0; i < words_I_typed.length; i++){
+        if(words_I_typed[i] === char_w_array100[i]) {
+            goods++;
+        }
+    }
+    return goods;
+}
+
 
 searchbar_focus_loop();
 delete_loop();
