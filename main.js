@@ -144,16 +144,17 @@ function update_game() {
     }
 }
 
-
+restarted = false;
 let time = 15;
 async function timer(time) {
     button = document.getElementById("timer");
     button.innerHTML = "time: " + time;
 // counts down from certain time
-    if (time > 0) {
+    if (time > 0 && restarted === false) {
         time--;
         setTimeout(timer, 1000, time);
     } else {
+        restarted = true;
         console.log("game over");
         end_game();
 
@@ -167,9 +168,17 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 async function start_game(time) {
+
     score_div = document.getElementById("score");
     score_div.innerHTML = "score: ";
     searchbar.value = "";
+    char_w_array100 = [];
+    words_I_typed = "";
+    word_div = document.getElementById("words");
+    word_div.innerHTML = "";
+    time = 15;
+
+
 
     await get_1kwords();
     await delay(200);
