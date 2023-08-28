@@ -185,11 +185,15 @@ function end_game() {
     searchbar.value = "";
 
 }
-function score() {
+function score() { //wpm - total amount of characters in the correctly typed words (including spaces), divided by 5 and normalised to 60 seconds. raw wpm - calculated just like wpm, but also includes incorrect words.
     //time
     let errors = find_errors();
     let goods = find_goods();
-    let score = (((goods+errors)/5)-errors)/(time/60);
+    let words_typed = goods+errors;
+    let raw_wpm = ((words_typed/5)/(time/60))
+    let accuracy = (goods/(goods+errors));
+
+    let score = accuracy * raw_wpm;
     console.log(score);
     let score_div = document.getElementById("score");
     score_div.innerHTML = "score: " + score.toFixed(2);
