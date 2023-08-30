@@ -45,7 +45,7 @@ function add_chars_to_div(char_array) {
         char.innerHTML = char_array[i];
         //change its color
         char.style.color = "black";
-        char.style.opacity = "0.5";
+        char.style.opacity = "0.7";
         div.appendChild(char);
     }
 }

@@ -1,3 +1,4 @@
+
 .searchbar{
     width: 99%;
     position: relative;
@@ -26,4 +27,24 @@
         opacity: .8; /* Show the cursor at the midpoint of the animation */
         background-color: gray;
     }
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #FFFFFF;
+    overflow-x: hidden;
+    letter-spacing: 0.2px;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    scroll-behavior: smooth;
+    background-color: #1f2029;
+    background: url("./assets/imgs/endless-constellation.svg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat;
 }
