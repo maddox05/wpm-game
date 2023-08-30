@@ -11,10 +11,10 @@ function get_1kwords(){
             let array_of_1kwords = textData.split("\n");
             let array_of_100words = [];
 
-            for(i = 0; i < 100; i++){
+            for(let i = 0; i < 100; i++){
                 array_of_100words.push(array_of_1kwords[Math.floor(Math.random() * 100)]);
             }
-            char_w_array100 = array_to_char(array_of_100words);
+            let char_w_array100 = array_to_char(array_of_100words);
             add_chars_to_div(char_w_array100);
         })
         .catch(error => {
