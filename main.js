@@ -189,9 +189,7 @@ async function start_game(time) {
 }
 function end_game() {
     score();
-    char_w_array100 = [];
-    words_I_typed = "";
-    searchbar.value = "";
+    window.location.reload();
 
 }
 function score() { //wpm - total amount of characters in the correctly typed words (including spaces), divided by 5 and normalised to 60 seconds. raw wpm - calculated just like wpm, but also includes incorrect words.
@@ -204,8 +202,10 @@ function score() { //wpm - total amount of characters in the correctly typed wor
 
     let score = accuracy * raw_wpm;
     console.log(score);
-    let score_div = document.getElementById("score");
-    score_div.innerHTML = "score: " + score.toFixed(2);
+    // let score_div = document.getElementById("score");
+    // score_div.innerHTML = "score: " + score.toFixed(2);
+    localStorage.setItem("score", score.toFixed(2));
+
 }
 function find_errors() {
     errors = 0;
@@ -226,7 +226,12 @@ function find_goods() {
     return goods;
 }
 
-
+function get_last_score() {
+    let score = localStorage.getItem("score");
+    let score_div = document.getElementById("score");
+    score_div.innerHTML = "score: " + score;
+}
+get_last_score()
 searchbar_focus_loop();
 delete_loop();
 

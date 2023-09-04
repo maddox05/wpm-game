@@ -12,7 +12,7 @@
 .cursor {
     width: 2px; /* Adjust the width of the cursor */
     height: 20px; /* Adjust the height of the cursor */
-    background: gray;
+    background: rgb(128, 128, 128);
     animation: blink 0.8s step-end infinite; /* Define the animation */
     opacity: .8;
 }
@@ -25,7 +25,7 @@
     }
     50% {
         opacity: .8; /* Show the cursor at the midpoint of the animation */
-        background-color: gray;
+        background-color: rgb(128, 128, 128);
     }
 }
 
