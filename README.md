@@ -35,7 +35,8 @@ This is a simple typing test application that allows you to measure your typing 
 
 ## Credits
 
-The list of 1000 words used in this application is sourced from [this GitHub Gist](https://gist.githubusercontent.com/deekayen/4148741/raw/98d35708fa344717d8eee15d11987de6c8e26d7d/1-1000.txt), and credit goes to its author.
+- The list of 1000 words used in this application is sourced from [this GitHub Gist](https://gist.githubusercontent.com/deekayen/4148741/raw/98d35708fa344717d8eee15d11987de6c8e26d7d/1-1000.txt), and credit goes to its author.
+- Thank you [@PPraneesh](https://github.com/PPraneesh) for fixing and rewriting basically all the code!
 
 ## License
 
