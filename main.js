@@ -1,9 +1,21 @@
-char_w_array100 = [];
-
-words_I_typed = "";
-let searchbar = document.getElementById("query");
+var char_w_array100 = [];
+var words_typed = "";
+var searchbar = document.getElementById("query");
+var time =15;
+var rank = 0;
+var raw_wpm =0
+var accuracy =0
 
 function get_1kwords(){
+    scoreSetter();
+    words_I_typed = "";
+    char_w_array100 = [];
+    words_typed = "";
+    errors = 0;
+    raw_wpm = 0;
+    accuracy = 0;
+    rank = 0;
+    restarted = false;
     fetch("https://gist.githubusercontent.com/deekayen/4148741/raw/98d35708fa344717d8eee15d11987de6c8e26d7d/1-1000.txt")
         .then(response => response.text())
         .then(textData => { // chain of promises
@@ -24,17 +36,12 @@ function get_1kwords(){
 
 function array_to_char(array) {
     let char_array = [];
-    if (array.length !== 0) {
         for (i = 0; i < array.length; i++) {
             for (j = 0; j < array[i].length; j++) {
                 char_array.push(array[i][j]);
             }
             char_array.push(" ");
         }
-    }
-    else {
-        console.log("hi");
-    }
     return char_array;
 }
 
@@ -43,112 +50,72 @@ function add_chars_to_div(char_array) {
     for (i = 0; i < char_array.length; i++) {
         let char = document.createElement("span");
         char.innerHTML = char_array[i];
-        //change its color
-        char.style.color = "black";
-        char.style.opacity = "0.7";
+        char.classList.add("white");
         div.appendChild(char);
     }
 }
 
-
 function searchbar_focus_loop() {
-
     searchbar.focus();
-    setTimeout(searchbar_focus_loop, 1000);
+    setTimeout(searchbar_focus_loop, 500);
 }
-
 
 function deleted(event) {
-    if(words_I_typed.length > 0) {
+    if(words_typed.length > 0) {
         if (event.keyCode === 8) {
-            span = document.getElementById("words").children[i - 1];
-            span.style.color = "black";
-            span.style.background = "white";
-            span.style.opacity = ".5";
-            span3 = document.getElementById("words").children[i + 1];
-            span3.style.color = "black";
-            span3.style.background = "white";
-            span3.style.opacity = ".5";
-
+            let cursorSpan = document.querySelector(".cursor");
+        if (cursorSpan) {
+            cursorSpan.classList.remove("cursor");
+        }
         }
     }
-    // true = down, false = up
-}
-//loop that checks length of words you are typing turns all other after it words to black
-function delete_loop() {
-    word_div = document.getElementById("words");
-    for (i = char_w_array100.length; i> words_I_typed.length; i--) {
-        spanplus2 = word_div.children[i];
-        if (spanplus2 !== undefined && spanplus2.className !== "cursor") {
-            spanplus2.style.color = "black";
-            spanplus2.style.background = "white";
-            spanplus2.style.opacity = ".5";
-            spanplus2.className = "NONE";
-
-        } else {
-        }
-
-    }
-
-    setTimeout(delete_loop, 500);
 }
 
 function cursor() {
-    if(words_I_typed.length > 0) {
-        for (j = 0; j < words_I_typed.length; j++) {
-            if (j === words_I_typed.length-1) {
-                index_span = document.getElementById("words").children[words_I_typed.length];
+    if(words_typed.length > 0) {
+        for (let j = 0; j < words_typed.length; j++) {
+            if (j === words_typed.length-1) {
+                index_span = document.getElementById("words").children[words_typed.length];
                 index_span.className = "cursor";
 
             } else {
                 index_span = document.getElementById("words").children[j+1];
-                index_span.className = "NONE";
-                index_span.style.color = "black";
-
-
-
+                index_span.classList.remove("cursor");
             }
         }
     }
     else {
         index_span = document.getElementById("words").children[0];
         index_span.className = "cursor";
-        console.log("hi");
     }
 }
-function update_game() {
-    words_I_typed = searchbar.value;
 
+function update_game() {
+    words_typed = searchbar.value;
     cursor();
     index_span = document.getElementById("words").children[0];
     index_span.className = "NONE";
     // CHECK IF WORDS ARE CORRECT
-    if(words_I_typed.length > 0){
+    if(words_typed.length > 0){
         correct = true;
-        for(i = 0; i < words_I_typed.length; i++){
-
-            if(words_I_typed[i] !== char_w_array100[i]) {
+        for(let i = 0; i < words_typed.length; i++){
+            if(words_typed[i] !== char_w_array100[i]) {
                 span = document.getElementById("words").children[i];
-                span.style.background = "red";
-                span.style.opacity = ".5";
+                span.classList.add("red");
                 correct = false;
-
             }
             else{
                 span = document.getElementById("words").children[i];
-                span.style.background = "green";
-                span.style.opacity = "1";
+                span.classList.add("green");
             }
         }
-
+        score();
     }
 }
-
 restarted = false;
-let time = 15;
 async function timer(time) {
-    button = document.getElementById("timer");
-    button.innerHTML = "time: " + time;
+    duration = document.getElementById("timer");
+    duration.innerHTML =  + time;
 // counts down from certain time
     if (time > 0 && restarted === false) {
         time--;
@@ -157,85 +124,64 @@ async function timer(time) {
         restarted = true;
         console.log("game over");
         end_game();
-
         word_div = document.getElementById("words");
         word_div.innerHTML = "";
-        button.innerHTML = "time:";
     }
 }
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-async function start_game(time) {
 
+async function start_game(duration) {
+    time = duration;
     score_div = document.getElementById("score");
-    score_div.innerHTML = "score: ";
+    score_div.innerHTML = "Score: ";
     searchbar.value = "";
     char_w_array100 = [];
-    words_I_typed = "";
+    words_typed = "";
     word_div = document.getElementById("words");
     word_div.innerHTML = "";
-    time = 15;
-
-
 
     await get_1kwords();
     await delay(200);
     index_span = document.getElementById("words").children[0];
     index_span.className = "cursor";
     timer(time);
-    // Start the game
 }
+
 function end_game() {
     score();
-    window.location.reload();
-
+    words_typed = "";
+    char_w_array100 = [];
 }
-function score() { //wpm - total amount of characters in the correctly typed words (including spaces), divided by 5 and normalised to 60 seconds. raw wpm - calculated just like wpm, but also includes incorrect words.
-    //time
+
+function score() { 
     let errors = find_errors();
-    let goods = find_goods();
-    let words_typed = goods+errors;
-    let raw_wpm = ((words_typed/5)/(time/60))
-    let accuracy = (goods/(goods+errors));
-
-    let score = accuracy * raw_wpm;
-    console.log(score);
-    // let score_div = document.getElementById("score");
-    // score_div.innerHTML = "score: " + score.toFixed(2);
-    localStorage.setItem("score", score.toFixed(2));
-
+    if (words_typed.length > 0) {
+        raw_wpm = (words_typed.length / 5) / (time / 60);
+        accuracy = ((words_typed.length - errors) * 100) / words_typed.length;
+        rank = accuracy * raw_wpm;
+    }
+    scoreSetter();
 }
 function find_errors() {
-    errors = 0;
-    for(i = 0; i < words_I_typed.length; i++){
-        if(words_I_typed[i] !== char_w_array100[i]) {
+    let errors = 0;
+    for(i = 0; i < words_typed.length; i++){
+        if(words_typed[i] !== char_w_array100[i]) {
             errors++;
         }
     }
     return errors;
 }
-function find_goods() {
-    goods = 0;
-    for(i = 0; i < words_I_typed.length; i++){
-        if(words_I_typed[i] === char_w_array100[i]) {
-            goods++;
-        }
-    }
-    return goods;
+function scoreSetter(){
+    let score_div = document.getElementById("score"); 
+    let acc_div = document.getElementById("accuracy"); 
+    let wpm_div = document.getElementById("wpm"); 
+    score_div.innerHTML = "Score: " + Math.round(rank);
+    acc_div.innerHTML= " Accurancy: "+ accuracy.toFixed(2) ;
+    wpm_div.innerHTML= " Wpm: "+ raw_wpm;
 }
-
-function get_last_score() {
-    let score = localStorage.getItem("score");
-    let score_div = document.getElementById("score");
-    score_div.innerHTML = "score: " + score;
-}
-get_last_score()
 searchbar_focus_loop();
-delete_loop();
-
-
-
 
 // force focus the thing you can type in, hide it, then when user writes words highlight them accordingly

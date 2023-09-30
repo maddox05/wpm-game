@@ -1,18 +1,30 @@
-
-.searchbar{
-    width: 99%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    height: 40px;
+*{
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+}
+h2{
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+}
+span{
+    font-size: 1.5rem;
+}
+.white{
+    color: white;
+}
+.green{
+    background: green;
+    opacity: 1;
+}
+.red{
+    background: red;
+    opacity: .5;
 }
 /* Define the cursor element */
 .cursor {
     width: 2px; /* Adjust the width of the cursor */
     height: 20px; /* Adjust the height of the cursor */
-    background: rgb(128, 128, 128);
+    background: rgb(79, 79, 79);
     animation: blink 0.8s step-end infinite; /* Define the animation */
     opacity: .8;
 }
@@ -20,23 +32,19 @@
 /* Define the blinking animation */
 @keyframes blink {
     from, to {
-        opacity: .5; /* Hide the cursor at the beginning and end of the animation */
-        background-color: white;
+        opacity: 1; /* Hide the cursor at the beginning and end of the animation */
+        background-color: rgba(77, 75, 75, 0.669);
     }
     50% {
         opacity: .8; /* Show the cursor at the midpoint of the animation */
-        background-color: rgb(128, 128, 128);
+        background-color: rgba(109, 104, 104, 0.6);
     }
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 1rem;
     color: #FFFFFF;
-    overflow-x: hidden;
-    letter-spacing: 0.2px;
     -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
     text-rendering: optimizeLegibility !important;
@@ -47,4 +55,59 @@ body {
     background-attachment: fixed;
     background-position: center;
     background-repeat: repeat;
+    padding: 0 1rem;
 }
+#query{
+    width: 99%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    height: 5rem;
+}
+#score, #accuracy, #wpm,#timer{
+    font-size:1.8rem ;
+}
+#start{
+    margin: 0.5rem 1rem 0.5rem 0;
+    font-size: 1.25rem;
+    height: 3rem;
+}
+#title{
+    font-size: 3rem;
+    text-align: center;
+}
+#words{
+    height: 7.2rem;
+}
+
+
+/* button CSS */
+.button-54 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.button-54:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+@media (min-width: 768px) {
+  .button-54 {
+    padding: 0.25em 0.75em;
+  }
+}
+
