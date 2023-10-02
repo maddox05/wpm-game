@@ -1,56 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
-    <!-- Google tag (gtag.js) -->
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="title" content="DuckMath"> <!-- Title for the website -->
+    <meta name="description" content="Welcome to DuckMath.org, where you can learn and have fun!"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <
+    <meta name="language" content="English"> 
+    <title>Maddox Type</title> 
+
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6T06Q3367"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-T6T06Q3367');
+        gtag('config', 'G-T6T06Q3367'); <!-- Google Analytics configuration -->
     </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"> <!-- Linking to Google Fonts -->
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/icons/Microsoft.VisualStudio.Services.Icons.Default">
-    <link rel="mask-icon" type="" href="assets/icons/Microsoft.VisualStudio.Services.Icons.Default" color="#111">
-    <!-- Meta Tags -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="DuckMath">
-    <meta name="description" content="Welcome to DuckMath.org, where you can learn and have fun!">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="language" content="English">
-    <title>Maddox Type</title>
+    <link rel="mask-icon" type="" href="assets/icons/Microsoft.VisualStudio.Services.Icons.Default" color="#111"> <!-- Favicon for the website -->
+
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> 
 
-
-
-    <script src="main.js" type="text/javascript" defer></script>
+    <!-- JavaScript -->
+    <script src="main.js" type="text/javascript" defer></script> <!-- Linking to an external JavaScript file with 'defer' attribute for deferred execution -->
     <noscript>Your browser doesn't have JavaScript enabled. Please enable JavaScript or switch to a browser that
-        supports it.</noscript>
-
-
+        supports it.</noscript> <!-- Message for browsers with JavaScript disabled -->
 </head>
+
 <body>
-<h1  id="title">Maddox Type</h1>
-
-<div id = "words"></div>
-<h2>Type here :</h2>
-<textarea rows= "4" class = "searchbar" onkeyup="update_game();" onkeydown="deleted(event);" type="text" id="query" name="searchbar"  placeholder="Click anyone to start game, Click only once!"></textarea>
-<button id="start" onclick="start_game(15)" class="button-54">Start (15sec)</button>
-<button id="start" onclick="start_game(30)" class="button-54">Start (30sec)</button>
-<button id="start" onclick="start_game(60)" class="button-54">Start (60sec)</button>
-<button id="start" onclick="start_game(120)" class="button-54">Start (120sec)</button>
-<h2 >Time: <span id="timer">0</span></h2>
-<div id="score">Score: 0</div>
-<div id="accuracy">Accuracy: 0</div>
-<div id="wpm">Wpm: 0</div>
-
-
+    <!-- HTML Body Content -->
+    <h1 id="title">Maddox Type</h1> <!-- Main heading -->
+    <div id="words"></div> <!-- Placeholder for words -->
+    <h2>Type here :</h2> <!-- Subheading for input field -->
+    <textarea rows="4" class="searchbar" onkeyup="update_game();" onkeydown="deleted(event);" type="text" id="query" name="searchbar" placeholder="Click anyone to start game, Click only once!"></textarea> <!-- Text input field with event handlers -->
+    <button id="start" onclick="start_game(15)" class="button-54">Start (15sec)</button> 
+    <button id="start" onclick="start_game(30)" class="button-54">Start (30sec)</button> 
+    <button id="start" onclick="start_game(60)" class="button-54">Start (60sec)</button> 
+    <button id="start" onclick="start_game(120)" class="button-54">Start (120sec)</button> 
+    <h2>Time: <span id="timer">0</span></h2> <!-- Subheading for timer -->
+    <div id="score">Score: 0</div> <!-- Display for score -->
+    <div id="accuracy">Accuracy: 0</div> <!-- Display for accuracy -->
+    <div id="wpm">Wpm: 0</div> <!-- Display for words per minute -->
 </body>
+
+</html>
