@@ -100,7 +100,7 @@ body {
 
 /* Styles for the container element with id 'words' */
 #words {
-    height: 7.2rem;  
+    padding: 10px 0;
 }
 
 /* Button CSS styles */
